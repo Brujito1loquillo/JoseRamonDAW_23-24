@@ -1,0 +1,29 @@
+:root {
+    --body-rows: 8;
+    // --body-areas: "header" repeat("main", calc(var(--body-rows) - 1));
+    --body-columns: 8;
+}
+
+html {
+    background-color: red;
+    height: 100%;
+
+    body {
+        background-color: white;
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: 100%;
+        // grid-template-rows: repeat(var(--body-rows), calc(100% / var(--body-rows)));
+        grid-template-rows: calc(100% / var(--body-rows)) repeat(calc(var(--body-rows) - 1), calc(100% / var(--body-rows)));
+        // grid-template-areas: var(--body-areas);
+        grid-template-areas:
+            "header"
+            "main"
+        ;
+
+        header {
+            background-color: green;
+        }
+    }
+}

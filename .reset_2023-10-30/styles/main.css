@@ -1,0 +1,20 @@
+:root {
+  --body-rows: 8;
+  --body-columns: 8;
+}
+
+html {
+  background-color: red;
+  height: 100%;
+}
+html body {
+  background-color: white;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: calc(100% / var(--body-rows)) repeat(calc(var(--body-rows) - 1), calc(100% / var(--body-rows)));
+  grid-template-areas: "header" "main";
+}
+html body header {
+  background-color: green;
+}/*# sourceMappingURL=main.css.map */

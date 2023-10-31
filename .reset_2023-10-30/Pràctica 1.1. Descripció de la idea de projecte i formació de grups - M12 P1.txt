@@ -1,0 +1,6 @@
+Descripciónd el proyecto:
+	La idea principal del proyecto es unifcar todas aquellas herramientas "on-line" para estudiantes y profesores de manera que trabajes siempre en un mismo entorno.
+	Haciendo que este entorno sea comodo tanto para los estudiantes como para los profesores.
+
+Participantes:
+	José-Ramón Pérez Ribelles

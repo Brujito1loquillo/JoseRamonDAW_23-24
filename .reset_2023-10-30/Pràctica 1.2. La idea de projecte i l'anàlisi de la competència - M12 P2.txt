@@ -1,0 +1,14 @@
+Una sola web preconstruida que contiene herramientas de trabajo para estudiantes conocidas como moodle, zoom (como ejemplo de aplicación de conferencias), herramientas de guardado en la nuve, organización del trabajo como calendario con notificaciones y herramientas como trello que utiliza el conocido metodo de trabajo Kanban y demas herramientas similares que puedan ser utiles para los alumnos asi como herramientas enfocadas para el profesorado, como djau para poder pasar lista y demas gestiones.
+
+Unificando estos portales lo que se quiere conseguir es un entrono de trabajo más amigable para todos con la finalidad de la gestión completa de todo lo que puedan necesitar.
+
+Así como añadiendo herramientas que no estan bien pensadas para 
+
+Competencia
+	Nombre
+	
+	Moodle
+	Trello
+	Zoom, Discord
+	Drive, Dropbox, GitHub
+		
