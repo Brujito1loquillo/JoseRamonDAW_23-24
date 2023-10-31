@@ -1,0 +1,21 @@
+package exceptions;
+
+import javax.swing.JOptionPane;
+
+public class IllegalMovementException extends Exception {
+	private String codi;
+	
+	public IllegalMovementException (String pCodi) {
+		new IllegalMovementException(pCodi, "Has realitzat un moviment incorrecte");
+	}
+	
+	public IllegalMovementException (String pCodi, String pMissatge) {
+		super(pMissatge);
+		
+		codi = pCodi;
+	}
+	
+	public void show () {
+		JOptionPane.showMessageDialog(null, "text a mostar dins la finestra", "Text a mostrar al caption", JOptionPane.ERROR_MESSAGE);
+	}
+}

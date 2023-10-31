@@ -1,0 +1,11 @@
+package exceptions;
+
+public class IllegalMovementException extends Exception {
+	private String codi;
+	
+	public IllegalMovementException (String pCodi, String pMissatge) {
+		super(pMissatge);
+		
+		codi = pCodi;
+	}
+}

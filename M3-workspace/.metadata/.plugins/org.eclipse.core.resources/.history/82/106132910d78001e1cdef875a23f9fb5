@@ -1,0 +1,9 @@
+package exceptions;
+
+public class IllegalMovementException extends Exception {
+	private String code;
+	
+	public IllegalMovementException () {
+		super("")
+	}
+}
