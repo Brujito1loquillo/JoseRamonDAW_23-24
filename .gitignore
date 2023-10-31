@@ -1,22 +1,36 @@
+### Los comentados con 3# son del archivo generado automaticamente para tener un ejemplo
 ### AL ###
 #Template for AL projects for Dynamics 365 Business Central
 #launch.json folder
-.vscode/
+###.vscode/
 #Cache folder
-.alcache/
+###.alcache/
 #Symbols folder
-.alpackages/
+###.alpackages/
 #Snapshots folder
-.snapshots/
+###.snapshots/
 #Testing Output folder
-.output/
+###.output/
 #Extension App-file
-*.app
+###*.app
 #Rapid Application Development File
-rad.json
+###rad.json
 #Translation Base-file
-*.g.xlf
+###*.g.xlf
 #License-file
-*.flf
+###*.flf
 #Test results file
-TestResults.xml
+### TestResults.xml
+
+## ########################### ##
+## Brujito1loquillo exclusions ##
+## ########################### ##
+
+# .Trash
+.Trash*
+
+# $RECYCLE.BIN
+$RECYCLE*
+
+# System Volume Information
+System*
