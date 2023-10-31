@@ -1,5 +1,0 @@
-package exceptions;
-
-public class WrongShiftException extends RuntimeException {
-	public WrongShiftException () {}
-}

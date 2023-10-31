@@ -1,3 +1,0 @@
-INDEX VERSION 1.134+/home/jperezr/datos/M3-workspace/.metadata/.plugins/org.eclipse.jdt.core
-2833011728.index
-1865797976.index

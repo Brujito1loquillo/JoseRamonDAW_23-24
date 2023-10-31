@@ -1,9 +1,0 @@
-package exceptions;
-
-public class SuicideMovimentException {
-	public SuicideMovimentException () {}
-	
-	public show () {
-		
-	}
-}
