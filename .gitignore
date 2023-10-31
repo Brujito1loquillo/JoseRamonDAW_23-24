@@ -34,3 +34,6 @@ $RECYCLE*
 
 # System Volume Information
 System*
+
+# Eclipse Workspace from Java non personal files
+M3-workspace/.*
