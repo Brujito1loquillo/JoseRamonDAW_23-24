@@ -193,32 +193,405 @@
 
         // var_dump($cartes[$pals[rand(0,count($pals))]]);
 
-
-        while (count($ma) < 10) {
+        $countCartes = 0;
+        while ( $countCartes < 10) {
             $pals = array_keys($cartes);
-            echo "Pals: <br />";
-            var_dump($pals);
-            echo "<br />";
             
-            $palKey = rand(0, count($pals));
-            var_dump($palKey); // die();
+            $palKey = rand(0, count($pals) - 1);
+
             $pal = $pals[$palKey];
-            var_dump($pal); // die();
 
-            $cartesPal = $cartes[$pal];
-            var_dump($cartesPal); die();
-            // $palAleatori     = $pals[(rand(0, count($pals)))];
-            // var_dump($palAleatori);
-            // die();
+            $cartesPal = array_keys($cartes[$pal]);
+            // var_dump($cartesPal); die();
             
+            $cartaKey = rand(0, count($cartesPal) - 1);
+            $carta = $cartesPal[$cartaKey];
 
-            // $cartesPal = array_keys($cartes[$pals[$palEscollit]]);
-            // $cartaEscollida = rand(0, count($cartesPal));
-            // $carta = $cartes[];
+
+            $ma[$pal][$carta] = $cartes[$pal][$carta];
+            unset($cartes[$pal][$carta]);
+            
+            echo "<div style=\"display:grid; grid-template-columns: repeat(4, 25%); "/*background-color: grey; */ . "border: 1px solid black;\">";
+                echo "<div>";
+                    echo "<h3>Bastons</h3>";
+                    if (isset($ma["bastons"])) var_dump($ma["bastons"]);
+                echo "</div>";
+
+                echo "<div>";
+                    echo "<h3>Ors</h3>";
+                    if (isset($ma["ors"])) var_dump($ma["ors"]);
+                echo "</div>";
+
+                echo "<div>";
+                    echo "<h3>Espases</h3>";
+                    if (isset($ma["espases"])) var_dump($ma["espases"]);
+                echo "</div>";
+
+                echo "<div>";
+                    echo "<h3>Copes</h3>";
+                    if (isset($ma["copes"])) var_dump($ma["copes"]);
+                echo "</div>";
+
+                echo "<div style=\"grid-columns: 4\">";
+                    echo "<h3>Total de cartes:</h3>";
+                    echo ++$countCartes;
+                echo "</div>";
+            echo "</div>";
         }
+
+        // return $ma;
+        $punts = 0;
+
+        foreach ($ma as $nomPal => $pal) {
+            foreach ($pal as $carta => $puntuacio) {
+                echo "$carta de $nomPal suma $puntuacio punts. <br/>";
+                $punts += $puntuacio;
+            }
+        }
+
+        return $punts;
     }
 
-    agafarCartes();
+    echo "Total de punts: " . agafarCartes();
+
+    echo "<h2>E07 Arrays Iguals</h2>";
+    
+    function equalArrays (array $p1, array $p2) {
+        $res = true;
+
+        if (count($p1) <> count($p2)) {
+            $res = false;
+        } else {
+            $kp1 = array_keys($p1);
+            $kp2 = array_keys($p2);
+
+            foreach ($kp1 as $key) {
+                if (!in_array($key, $kp2)) {
+                    $res = false;
+                }
+            }
+
+            if ($res) {
+                foreach ($p1 as $key => $val) {
+                    if ($p2[$key] <> $val) {
+                        $res = false;
+                    }
+                }
+            }
+        }
+
+        return $res;
+    }
+
+    // PROVA 1
+
+    $array1 = [
+        "a" => 0,
+        "b" => 1,
+        "c" => 2
+    ];
+
+    $array2 = [
+        "a" => 0,
+        "b" => 1,
+        "c" => 2
+    ];
+
+    $sonIguals = (equalArrays($array1, $array2)) ? "iguals" : "diferents";
+    echo "Els arrays 1 y 2 son $sonIguals <br />";
+
+    // PROVA 2
+
+    $array1 = [
+        "a" => 0,
+        "b" => 1,
+        "c" => 2
+    ];
+
+    $array2 = [
+        "a" => 0,
+        "b" => 1,
+        "d" => 2
+    ];
+
+    $sonIguals = (equalArrays($array1, $array2)) ? "iguals" : "diferents";
+    echo "Els arrays 1 y 2 son $sonIguals <br />";
+
+    // PROVA 3
+
+    $array1 = [
+        "a" => 0,
+        "b" => 2,
+        "c" => 1
+    ];
+
+    $array2 = [
+        "a" => 0,
+        "b" => 1,
+        "c" => 2
+    ];
+
+    $sonIguals = (equalArrays($array1, $array2)) ? "iguals" : "diferents";
+    echo "Els arrays 1 y 2 son $sonIguals <br />";
+
+    // PROVA 4
+
+    $array1 = [
+        "a" => 0,
+        "b" => 1,
+        "c" => 2
+    ];
+
+    $array2 = [
+        "a" => 0,
+        "c" => 2,
+        "b" => 1
+    ];
+
+    $sonIguals = (equalArrays($array1, $array2)) ? "iguals" : "diferents";
+    echo "Els arrays 1 y 2 son $sonIguals <br />";
+
+    echo "<h2>E08 Buscar una cadena</h2>";
+
+    function inString (String $text, String $cadena) {
+        // Retorna el numero de vegades que apareix la cadena al text
+        $arrayFromText = str_split($text);
+        $arrayFromCadena = str_split($cadena);
+
+        $comparing = false;
+        $caracterActual = -1;
+
+        $aparicions = 0;
+
+        foreach ($arrayFromText as $caracter) {
+            if ($caracter === $arrayFromCadena[0] && $comparing === false) {
+                $comparing = true;
+                $caracterActual = 0;
+            }
+
+            if ($comparing) {
+                if ($caracter === $arrayFromCadena[$caracterActual]) {
+                    $caracterActual ++;
+                } else {
+                    $comparing = false;
+                    $caracterActual = -1;
+                }
+            }
+
+            if ($comparing && $caracterActual === count($arrayFromCadena)) {
+                $comparing = false;
+                $caracterActual = -1;
+
+                $aparicions++;
+            }
+        }
+
+        return $aparicions;
+    }
+
+    $text = "acava d'acavar l'acampada";
+    $cadena1 = "ava";
+    $cadena2 = "aca";
+    $cadena3 = "a";
+    $cadena4 = $text;
+    $cadena5 = "z";
+
+    echo $text . "<hr />";
+
+    echo "La cadena: $cadena1 apareix " . inString($text, $cadena1) . " cops <br />";
+    echo "La cadena: $cadena2 apareix " . inString($text, $cadena2) . " cops <br />";
+    echo "La cadena: $cadena3 apareix " . inString($text, $cadena3) . " cops <br />";
+    echo "La cadena: $cadena4 apareix " . inString($text, $cadena4) . " cops <br />";
+    echo "La cadena: $cadena5 apareix " . inString($text, $cadena5) . " cops <br />";
+
+    echo "<hr />";
+
+    function primeraAparicio (String $text, String $cadena) {
+        $arrayFromText = str_split($text);
+        $arrayFromCadena = str_split($cadena);
+
+        $comparing = false;
+        $caracterActual = -1;
+
+        $primeraAparicio = false;
+        $founded = false;
+
+        foreach ($arrayFromText as $keyCaracter => $caracter) {
+            if ($caracter === $arrayFromCadena[0] && $comparing === false && !$founded) {
+                $comparing = true;
+                $caracterActual = 0;
+                
+                $primeraAparicio = $keyCaracter;
+            }
+
+            if ($comparing) {
+                if ($caracter === $arrayFromCadena[$caracterActual]) {
+                    $caracterActual ++;
+                } else {
+                    $comparing = false;
+                    $caracterActual = -1;
+
+                    $primeraAparicio = false;
+                }
+            }
+
+            if ($comparing && $caracterActual === count($arrayFromCadena)) {
+                $comparing = false;
+
+                $founded = true;
+            }
+        }
+
+        return $primeraAparicio;
+    }
+
+    /*
+    echo "El primer cop que apareix la cadena: $cadena1 es a la posició: " . primeraAparicio($text, $cadena1) . "<br />";
+    echo "El primer cop que apareix la cadena: $cadena2 es a la posició: " . primeraAparicio($text, $cadena2) . "<br />";
+    echo "El primer cop que apareix la cadena: $cadena3 es a la posició: " . primeraAparicio($text, $cadena3) . "<br />";
+    echo "El primer cop que apareix la cadena: $cadena4 es a la posició: " . primeraAparicio($text, $cadena4) . "<br />";
+    echo "El primer cop que apareix la cadena: $cadena5 es a la posició: " . primeraAparicio($text, $cadena5) . "<br />";
+    */
+
+    echo "El primer cop que apareix la cadena: <b>$cadena1</b> es a la posicio: "; var_dump(primeraAparicio($text, $cadena1)); echo "<br />";
+    echo "El primer cop que apareix la cadena: <b>$cadena2</b> es a la posicio: "; var_dump(primeraAparicio($text, $cadena2)); echo "<br />";
+    echo "El primer cop que apareix la cadena: <b>$cadena3</b> es a la posicio: "; var_dump(primeraAparicio($text, $cadena3)); echo "<br />";
+    echo "El primer cop que apareix la cadena: <b>$cadena4</b> es a la posicio: "; var_dump(primeraAparicio($text, $cadena4)); echo "<br />";
+    echo "El primer cop que apareix la cadena: <b>$cadena5</b> es a la posicio: "; var_dump(primeraAparicio($text, $cadena5)); echo "<br />";
+
+    echo "<h2>E09 dataVerifier() - Funció verificadora d'una data de naixement</h2>";
+    
+    function dataVerifier (String $data) {
+        $valid  = true;
+        
+        $dataValues = explode("/", $data);
+        
+        $dia = $dataValues[0]; $mes = $dataValues[1]; $any =  $dataValues[2];
+
+        // $mesos31 = [1,3,5,7,8,10,12];
+        $mesos30 = [4,6,9,11];
+
+        if ($any < 1900 || $any > date("Y") || $mes <= 0 || $mes > 12 || $dia <= 0 || $dia > 31 || ($mes === 2 && $dia >= 29 && date("L", strtotime("$any-01-01")) === 0) || ($mes === 2 && $dia > 29) || $dia > 31 || ($dia > 30 && in_array($mes, $mesos30))) {
+            $valid = false;
+        }
+
+        return $valid;
+    }
+
+    $data1 = "13/05/2000";
+
+    echo "Data valida (<b>$data1</b>)? "; var_dump(dataVerifier($data1)); echo "<br />";
+    echo "<hr />";
+    
+    // 01/01/1614   ERROR				
+    $data = "01/01/1614";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+    
+    // 01/01/1993	OK
+    $data = "01/01/1993";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 01/01/2025	ERROR
+    $data = "01/01/2025";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 31/12/1899	ERROR
+    $data = "31/12/1899";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+    
+    // 01/01/1900	OK
+    $data = "01/01/1900";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+    
+    // today	OK
+    $data = date("j/n/Y");
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // Year(DATE)==Year(today)+1 ERROR
+    $data = date("j/n");
+    $data .= "/" .date("Y") + 1;
+
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 01/-3/2020	ERROR
+    $data = "01/-3/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 01/04/2020	OK
+    $data = "01/04/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 01/18/2020	ERROR
+    $data = "01/18/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 01/00/2020	ERROR
+    $data = "01/00/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 01/01/2020	OK
+    $data = "01/01/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 01/12/2020 Ok
+    $data = "01/12/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 01/13/2020	ERROR
+    $data = "01/13/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // -2/12/2020	ERROR
+    $data = "-2/12/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 06/03/2020	OK
+    $data = "06/03/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 40/03/2020	ERROR
+    $data = "40/03/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 00/01/2020	ERROR
+    $data = "00/01/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 01/01/2020	OK
+    $data = "01/01/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 28/04/2020	OK
+    $data = "28/04/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 29/02/2019	ERROR
+    $data = "29/02/2019";
+    echo "<p style=\"color:red\">$data "; var_dump(dataVerifier($data)); echo "valor esperat: False</p><br />";
+
+    // 29/02/2020	OK
+    $data = "29/02/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 30/02/2021	ERROR
+    $data = "30/02/2021";
+    echo "<p style=\"color:red\">$data "; var_dump(dataVerifier($data)); echo "valor esperat: False</p><br />";
+
+    // 30/04/2020	ok
+    $data = "30/04/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 31/03/2020	ok
+    $data = "31/03/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: Ok<br />";
+
+    // 31/04/2020	ERROR
+    $data = "31/04/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
+
+    // 32/06/2020	ERROR
+    $data = "32/06/2020";
+    echo "$data "; var_dump(dataVerifier($data)); echo "valor esperat: False<br />";
 
     ?>
 </body>
