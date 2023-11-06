@@ -22,10 +22,10 @@ abstract class FrontController extends Controller {
 
         if (isset($controller) && isset($method)) {
             if (file_exists("classes/controller/$controller.php")) {
-                if (method_exists($method, $controller)) {
+                if (method_exists($controller, $method)) {
                     $controller::$method();
                 } else {
-                    throw new JRDontLikesWorkException("Hacer una excepcion para cuando llega por cabezera un metodo que no existe");    
+                    throw new MethodNotExistException($controller, $method);
                 }
             } else {
                 throw new ClassNotFoundException($controller);
