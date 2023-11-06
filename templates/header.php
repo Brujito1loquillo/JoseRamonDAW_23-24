@@ -1,9 +1,12 @@
 <header>
-    <h1>José-Ramón Pérez Ribelles</h1>
+    <h1>
+        <a href="/?">José-Ramón Pérez Ribelles</a>
+    </h1>
+    
     <nav>
         <ul>
             <li>
-                <a href="/?module/m6">M6</a>
+                <a href="/?module/show/m6">M6</a>
             </li>
         </ul>
     </nav>

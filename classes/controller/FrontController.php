@@ -11,7 +11,22 @@ abstract class FrontController extends Controller {
                         $controller = "HomeController";
                         $method = "show";
                     } else {
-                        throw new JRDontLikesWorkException("Trabaja en FrontController::dispatch() para GET con parametros");
+                        // throw new JRDontLikesWorkException("Trabaja en FrontController::dispatch() para GET con parametros");
+                        // echo $_SERVER["REQUEST_URI"];
+                        $uri = substr($_SERVER["REQUEST_URI"], 2);
+                        // echo $uri;
+                        $uriParts = explode("/", $uri);
+                        // var_dump($uriParts);
+
+                        if (count($uriParts) >= 2) {
+                            $controller = ucfirst($uriParts[0]) . "Controller";
+                            unset($uriParts[0]);
+
+                            $method = $uriParts[1];
+                            unset($uriParts[1]);
+                        }
+
+                        if (count($uriParts) === 0) unset($uriParts);
                     }
                 break;
             case "POST":
@@ -23,7 +38,11 @@ abstract class FrontController extends Controller {
         if (isset($controller) && isset($method)) {
             if (file_exists("classes/controller/$controller.php")) {
                 if (method_exists($controller, $method)) {
-                    $controller::$method();
+                    if (isset($uriParts) && count($uriParts) > 0) {
+                        $controller::$method(...$uriParts);
+                    } else {
+                        $controller::$method();
+                    }
                 } else {
                     throw new MethodNotExistException($controller, $method);
                 }
